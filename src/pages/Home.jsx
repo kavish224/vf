@@ -13,7 +13,7 @@ function Home() {
     },[])
     return (
         <>
-            <div className='p-4 bg-black'> 
+            <div className='p-4 bg-black text-white '> 
                 <NavBar/>
                 </div>
             <div className='bg-black min-h-screen text-white p-4'>
