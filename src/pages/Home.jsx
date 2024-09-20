@@ -18,7 +18,6 @@ function Home() {
                 </div>
             <div className='bg-black min-h-screen text-white p-4'>
             <div className='flex flex-wrap justify-center gap-4'>
-                jjjjlkjmlkjlknh
                     {video.map(video => (
                         <VideoCard
                             key={video._id}
