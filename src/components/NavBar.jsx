@@ -1,9 +1,9 @@
 export const NavBar = () => {
     return(
         <>
-            <div className="text-white flex justify-between items-center shadow-sm shadow-[#ffffff] border-white bg-black rounded-full p-2
+            <div className="text-white flex justify-between items-center shadow-sm shadow-x border-white bg-black rounded-full p-2
                             md:flex-row flex-col md:p-4 sm:space-x-4 space-x-0 space-y-2 md:space-y-0">
-                <div className="ml-2 text-center text-lg">
+                <div className="ml-2 text-center text-lg hover:text-x cursor-pointer">
                     Video Tube
                 </div>
                 <div className="hover:text-x cursor-pointer">

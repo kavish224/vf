@@ -6,7 +6,7 @@ export const VideoCard = ({
 }) => {
     return(
         <>
-        <div className="m-2 p-4 shadow-md shadow-white relative h-[350px] w-[300px] rounded-md">
+        <div className="m-2 p-4 shadow-md shadow-x relative h-[350px] w-[300px] rounded-md">
             <div className="h-[80%] w-full">
             <img src={thumbUrl}  className="z-0 w-full h-full rounded-md object-cover"/>
             </div>
