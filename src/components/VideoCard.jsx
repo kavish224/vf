@@ -1,19 +1,17 @@
+import { useNavigate } from "react-router-dom";
 export const VideoCard = ({
     thumbUrl,
     title,
     views,
     owner,
-    videoLink
+    videoId
 }) => {
+    const navigate = useNavigate();
+    const handleCardClick = () => {
+        navigate(`/watch?v=${videoId}`);
+    };
     return(
-        <>
-        <a 
-            href={videoLink} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="block"
-        >
-        <div className="m-2 p-4 shadow-md shadow-x relative h-[350px] w-[300px] rounded-md">
+        <div className="m-2 p-4 shadow-md shadow-x relative h-[350px] w-[300px] rounded-md cursor-pointer" onClick={handleCardClick}>
             <div className="h-[80%] w-full">
             <img src={thumbUrl}  className="z-0 w-full h-full rounded-md object-cover"/>
             </div>
@@ -28,7 +26,5 @@ export const VideoCard = ({
                 </div>
             </div>
         </div>
-        </a>
-    </>
     )
 }

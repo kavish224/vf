@@ -25,7 +25,7 @@ function Home() {
                             title={video.title}
                             views={video.views}
                             owner={video.ownerDetails.username}
-                            videoLink={video.videoFile}
+                            videoId={video._id}
                         />
                     ))}
                 </div>
