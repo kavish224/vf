@@ -2,10 +2,17 @@ export const VideoCard = ({
     thumbUrl,
     title,
     views,
-    owner
+    owner,
+    videoLink
 }) => {
     return(
         <>
+        <a 
+            href={videoLink} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="block"
+        >
         <div className="m-2 p-4 shadow-md shadow-x relative h-[350px] w-[300px] rounded-md">
             <div className="h-[80%] w-full">
             <img src={thumbUrl}  className="z-0 w-full h-full rounded-md object-cover"/>
@@ -21,6 +28,7 @@ export const VideoCard = ({
                 </div>
             </div>
         </div>
+        </a>
     </>
     )
 }
