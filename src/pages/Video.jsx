@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom"
 import { NavBar } from "../components/NavBar";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { SugVideoCard } from "../components/sugVideoCard";
+import { SugVideoCard } from "../components/SugVideoCard";
 export const Video = () => {
     const [vid, setVid] = useState([])
     const [searchParams] = useSearchParams();
