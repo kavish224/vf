@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const navigate = useNavigate()
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
@@ -10,7 +11,7 @@ export const NavBar = () => {
         <>
             <div className="text-white flex justify-between items-center shadow-md shadow-x border-white bg-black rounded-full p-4
                             md:flex-row flex-row md:p-4 space-x-4 relative">
-                <div className="ml-2 text-center text-lg hover:text-x cursor-pointer">
+                <div className="ml-2 text-center text-lg hover:text-x cursor-pointer" onClick={(e)=>navigate("/")}>
                     Video Tube
                 </div>
                 <div className="md:hidden flex justify-end items-center">
@@ -21,7 +22,7 @@ export const NavBar = () => {
                     </button>
                 </div>
                 <div className="hidden md:flex md:items-center md:space-x-6">
-                    <div className="hover:text-x cursor-pointer">
+                    <div className="hover:text-x cursor-pointer" onClick={(e)=>navigate("/")}>
                         Home
                     </div>
                     <div className="hover:text-x cursor-pointer">
@@ -45,9 +46,9 @@ export const NavBar = () => {
                     </div>
                 </div>
                 {isOpen && (
-                    <div className="md:hidden absolute top-12 left-0 w-full bg-black rounded-lg shadow-sm shadow-x p-8 z-50">
+                    <div className="md:hidden absolute top-12 left-0 w-[90%] bg-black rounded-lg shadow-md shadow-x p-8 z-50">
                         <div className="flex flex-col space-y-4 items-center">
-                            <div className="hover:text-x cursor-pointer">
+                            <div className="hover:text-x cursor-pointer" onClick={(e)=>navigate("/")}>
                                 Home
                             </div>
                             <div className="hover:text-x cursor-pointer">
