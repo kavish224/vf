@@ -6,7 +6,7 @@ function Home() {
     const [video, setVideo] = useState([]);
     useEffect(()=>{
         const videos = async()=> {
-            const video = await axios.get("http://65.2.190.212:8000/api/v1/video/")
+            const video = await axios.get("http://13.232.190.14:8000/api/v1/video/")
             setVideo(video.data.data.docs);
         }
         videos()

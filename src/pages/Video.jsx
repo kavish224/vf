@@ -10,14 +10,14 @@ export const Video = () => {
     const [sugVideo, setSugVideo] = useState([]);
     useEffect(() => {
         const sugVideos = async () => {
-            const video = await axios.get("http://65.2.190.212:8000/api/v1/video/")
+            const video = await axios.get("http://13.232.190.14:8000/api/v1/video/")
             setSugVideo(video.data.data.docs);
         }
         sugVideos()
     }, [])
     useEffect(() => {
         const fetchVideo = async () => {
-            const video = await axios.get(`http://65.2.190.212:8000/api/v1/video/v/${videoId}`)
+            const video = await axios.get(`http://13.232.190.14:8000/api/v1/video/v/${videoId}`)
             setVid(video.data.data[0])
         }
         fetchVideo()
