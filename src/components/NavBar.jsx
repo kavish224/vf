@@ -8,7 +8,7 @@ export const NavBar = () => {
     };
     return (
         <>
-            <div className="text-white flex justify-between items-center shadow-sm shadow-x border-white bg-black rounded-full p-4
+            <div className="text-white flex justify-between items-center shadow-md shadow-x border-white bg-black rounded-full p-4
                             md:flex-row flex-row md:p-4 space-x-4 relative">
                 <div className="ml-2 text-center text-lg hover:text-x cursor-pointer">
                     Video Tube
