@@ -17,7 +17,7 @@ export const Video = () => {
     }, [])
     useEffect(() => {
         const fetchVideo = async () => {
-            const video = await axios.get(`http://vtapi.kavishambani.in/api/v1/video/v/${videoId}`)
+            const video = await axios.get(`https://vtapi.kavishambani.in/api/v1/video/v/${videoId}`)
             setVid(video.data.data[0])
         }
         fetchVideo()
