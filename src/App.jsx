@@ -5,7 +5,6 @@ import './App.css'
 import Home from './pages/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Video } from './pages/Video'
-
 function App() {
 
   return (
@@ -13,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route path='/watch' element={<Video/>}/> 
+          <Route path='/watch' element={<Video/>}/>  
         </Routes>
       </BrowserRouter>
     </>
