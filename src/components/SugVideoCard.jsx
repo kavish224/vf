@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 export const SugVideoCard = ({
     thumbUrl,
     title,
@@ -6,12 +6,8 @@ export const SugVideoCard = ({
     owner,
     videoId
 }) => {
-    const navigate = useNavigate();
-    const handleCardClick = () => {
-        navigate(`/watch?v=${videoId}`);
-    };
     return(
-        <div className="m-1 flex shadow-md shadow-x relative h-[150px] w-full rounded-md cursor-pointer" onClick={handleCardClick}>
+        <Link to={`/watch?v=${videoId}`} className="m-1 flex shadow-md shadow-x relative h-[150px] w-full rounded-md cursor-pointer" >
             <div className="h-full w-[50%]">
             <img src={thumbUrl}  className="z-0 w-full h-full rounded-md object-cover"/>
             </div>
@@ -28,6 +24,6 @@ export const SugVideoCard = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
