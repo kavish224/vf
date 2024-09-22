@@ -28,7 +28,7 @@ export const Video = () => {
         }
         fetchComments()
         
-    }, [])
+    }, [videoId])
     useEffect(() => {
         const fetchVideo = async () => {
             const video = await axios.get(`https://vtapi.kavishambani.in/api/v1/video/v/${videoId}`)
