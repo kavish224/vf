@@ -3,8 +3,11 @@ import { NavBar } from "../components/NavBar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { SugVideoCard } from "../components/SugVideoCard";
+import { formatDistanceToNow } from "date-fns";
+import { CommentCard } from "../components/CommentCard";
 export const Video = () => {
     const [vid, setVid] = useState([])
+    const [comm, setComm] = useState([])
     const [searchParams] = useSearchParams();
     const videoId = searchParams.get("v");
     const [sugVideo, setSugVideo] = useState([]);
@@ -14,6 +17,17 @@ export const Video = () => {
             setSugVideo(video.data.data.docs);
         }
         sugVideos()
+        const fetchComments = async() => {
+            try {
+                const response = await axios.get(`https://vtapi.kavishambani.in/api/v1/comment/${videoId}`)
+                const comments = response.data.data
+                setComm(comments)
+            } catch (error) {
+                console.error("Error fetching comments:", error);
+            }
+        }
+        fetchComments()
+        
     }, [])
     useEffect(() => {
         const fetchVideo = async () => {
@@ -46,6 +60,9 @@ export const Video = () => {
             console.error("Error subscribing:", error);
         }
     };
+    const sinceUpload = () => {
+        return vid.createdAt ? formatDistanceToNow(new Date(vid.createdAt), { addSuffix: true }) : '';
+    }
     return (
         <>
             <div className="bg-black text-white p-2">
@@ -89,8 +106,21 @@ export const Video = () => {
                                 {vid.owner?.isSubscribed ? "Subscribed" : "Subscribe"}
                             </button>
                         </div>
+                        <div className="shadow-md shadow-x p-4 mt-2 rounded-lg">
+                            {vid.views} views • {sinceUpload()} 
+                            <div className="pt-2">
+                                {vid.description}
+                            </div>
+                        </div>
+                    <div className="mt-6">
+                        Comments {comm.totalDocs}
+                        <div>
+                            {comm.docs?.map(comments => (
+                                <CommentCard key={comments._id} avatar={comments.owner[0]?.avatar} fullname={comments.owner[0]?.fullname} content={comments.content} likes={comments.likesCount} createdAt={comments.createdAt}/>
+                            ))}
+                        </div>
                     </div>
-
+                    </div>
                     {/* Suggested Video Section */}
                     <div className="w-full md:w-[25%] flex flex-col mt-2 md:mt-0 md:pl-4"> {/* Removed vertical gap on mobile */}
                         <div className="space-y-4">
