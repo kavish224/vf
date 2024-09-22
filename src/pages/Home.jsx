@@ -8,6 +8,7 @@ function Home() {
         const videos = async()=> {
             const video = await axios.get("https://vtapi.kavishambani.in/api/v1/video/");
             setVideo(video.data.data.docs);
+            document.title = "VideoTube"
         }
         videos()
     },[])

@@ -19,6 +19,8 @@ export const Video = () => {
         const fetchVideo = async () => {
             const video = await axios.get(`https://vtapi.kavishambani.in/api/v1/video/v/${videoId}`)
             setVid(video.data.data[0])
+            document.title = `${video.data.data[0]?.title} - VideoTube`;
+            window.scrollTo(0, 0);
         }
         fetchVideo()
     }, [videoId])
@@ -54,7 +56,7 @@ export const Video = () => {
                     <div className="w-full md:w-[80%] flex flex-col md:min-h-screen">
                         <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-lg">
                             {vid.videoFile ? (
-                                <video controls className="absolute top-0 left-0 w-full h-full object-cover">
+                                <video key={vid._id} controls className="absolute top-0 left-0 w-full h-full object-cover">
                                     <source src={vid.videoFile} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
