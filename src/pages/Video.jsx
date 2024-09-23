@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom";
 import { NavBar } from "../components/NavBar";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -6,38 +6,45 @@ import { SugVideoCard } from "../components/SugVideoCard";
 import { formatDistanceToNow } from "date-fns";
 import { CommentCard } from "../components/CommentCard";
 export const Video = () => {
-    const [vid, setVid] = useState([])
-    const [comm, setComm] = useState([])
+    const [vid, setVid] = useState([]);
+    const [comm, setComm] = useState([]);
     const [searchParams] = useSearchParams();
     const videoId = searchParams.get("v");
     const [sugVideo, setSugVideo] = useState([]);
     useEffect(() => {
         const sugVideos = async () => {
-            const video = await axios.get("https://vtapi.kavishambani.in/api/v1/video/");
-            setSugVideo(video.data.data.docs);
-        }
-        sugVideos()
-        const fetchComments = async() => {
             try {
-                const response = await axios.get(`https://vtapi.kavishambani.in/api/v1/comment/${videoId}`)
-                const comments = response.data.data
-                setComm(comments)
+                const video = await axios.get("https://vtapi.kavishambani.in/api/v1/video/");
+                setSugVideo(video.data.data.docs);
             } catch (error) {
-                console.error("Error fetching comments:", error);
+                console.error("Error fetching Suggested videos: ", error);
             }
         }
-        fetchComments()
-        
-    }, [videoId])
+        sugVideos();
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`https://vtapi.kavishambani.in/api/v1/comment/${videoId}`);
+                const comments = response.data.data;
+                setComm(comments);
+            } catch (error) {
+                console.error("Error fetching comments: ", error);
+            }
+        }
+        fetchComments();
+    }, [videoId]);
     useEffect(() => {
         const fetchVideo = async () => {
-            const video = await axios.get(`https://vtapi.kavishambani.in/api/v1/video/v/${videoId}`)
-            setVid(video.data.data[0])
-            document.title = `${video.data.data[0]?.title} - VideoTube`;
-            window.scrollTo(0, 0);
+            try {
+                const video = await axios.get(`https://vtapi.kavishambani.in/api/v1/video/v/${videoId}`);
+                setVid(video.data.data[0])
+                document.title = `${video.data.data[0]?.title} - VideoTube`;
+                window.scrollTo(0, 0);
+            } catch (error) {
+                console.error("Error fetching video: ", error);
+            }
         }
-        fetchVideo()
-    }, [videoId])
+        fetchVideo();
+    }, [videoId]);
     const handleSubscribe = async () => {
         try {
             // Simulate the subscribe action (you can integrate this with your backend)
@@ -61,7 +68,7 @@ export const Video = () => {
         }
     };
     const sinceUpload = () => {
-        return vid.createdAt ? formatDistanceToNow(new Date(vid.createdAt), { addSuffix: true }) : '';
+        return vid.createdAt ? formatDistanceToNow(new Date(vid.createdAt), { addSuffix: true }) : 'error in fetching upload time';
     }
     return (
         <>
@@ -82,8 +89,8 @@ export const Video = () => {
                             )}
                         </div>
 
-                        <div className="pl-2 text-2xl mt-2"> {/* Reduced margin */}
-                            {vid.title}
+                        <div className="pl-2 text-2xl mt-2">
+                            {vid.title ? vid.title : "error in loading video"}
                         </div>
 
                         <div className="flex items-center mt-4 px-2">
@@ -107,24 +114,23 @@ export const Video = () => {
                             </button>
                         </div>
                         <div className="shadow-md shadow-x p-4 mt-2 rounded-lg">
-                            {vid.views} views • {sinceUpload()} 
+                            {vid?.views} views • {sinceUpload()}
                             <div className="pt-2">
-                                {vid.description}
+                                {vid?.description}
                             </div>
                         </div>
-                    <div className="mt-6">
-                        Comments {comm.totalDocs}
-                        <div>
-                            {comm.docs?.map(comments => (
-                                <CommentCard key={comments._id} avatar={comments.owner[0]?.avatar} fullname={comments.owner[0]?.fullname} content={comments.content} likes={comments.likesCount} createdAt={comments.createdAt}/>
-                            ))}
+                        <div className="mt-6">
+                            {comm?.totalDocs} {comm.totalDocs > 1 ? "Comments" : "Comment"}
+                            <div className="mt-2">
+                                {comm.docs ? comm.docs?.map(comments => (
+                                    <CommentCard key={comments._id} avatar={comments.owner[0]?.avatar} fullname={comments.owner[0]?.fullname} content={comments.content} likes={comments.likesCount} createdAt={comments.createdAt} />
+                                )) : "Error in fetching comments"}
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    {/* Suggested Video Section */}
-                    <div className="w-full md:w-[25%] flex flex-col mt-2 md:mt-0 md:pl-4"> {/* Removed vertical gap on mobile */}
+                    <div className="w-full md:w-[25%] flex flex-col mt-2 md:mt-0 md:pl-4">
                         <div className="space-y-4">
-                            {sugVideo.map(video => (
+                            {sugVideo[0]?._id ? sugVideo.map(video => (
                                 <SugVideoCard
                                     key={video._id}
                                     thumbUrl={video.thumbnail}
@@ -133,13 +139,11 @@ export const Video = () => {
                                     owner={video.ownerDetails.username}
                                     videoId={video._id}
                                 />
-                            ))}
+                            )) : "Error in loading suggestion"}
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </>
     )
 }
