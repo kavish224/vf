@@ -138,6 +138,7 @@ export const Video = () => {
                                     views={video.views}
                                     owner={video.ownerDetails.username}
                                     videoId={video._id}
+                                    createdAt={video.createdAt}
                                 />
                             )) : "Error in loading suggestion"}
                         </div>
