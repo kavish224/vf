@@ -31,6 +31,8 @@ function Home() {
                             views={video.views}
                             owner={video.ownerDetails.username}
                             videoId={video._id}
+                            createdAt={video.createdAt}
+                            avatar={video.ownerDetails.avatar}
                         />
                     )) : "Error in Loading videos"}
                 </div>
