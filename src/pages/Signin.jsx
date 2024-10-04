@@ -18,12 +18,8 @@ export const Signin = () => {
                 {username:user,password},
                 {withCredentials: true}
             );
-            console.log(response);
-            
             if (response.status === 200 && response.data) {
                 const userResponse = await axios.get(`${import.meta.env.VITE_AWS_URL}/users/current-user`, {withCredentials: true});
-                console.log(userResponse.data);
-                
                 setAuth({
                     isAuthenticated: true,
                     user: userResponse.data.user,
