@@ -10,7 +10,7 @@ import { authState } from "../recoil/authAtom"
 export const Signin = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
-    const setAuth = useRecoilState(authState);
+    const [,setAuth] = useRecoilState(authState);
     const navigate = useNavigate();
     const handleLogin = async()=>{
         try {
