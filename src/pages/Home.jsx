@@ -9,7 +9,7 @@ function Home() {
     useEffect(() => {
         const videos = async () => {
             try {
-                const video = await axios.get("https://vtapi.kavishambani.in/api/v1/video/");
+                const video = await axios.get(`${import.meta.env.VITE_AWS_URL}/video/`);
                 setVideo(video.data.data.docs);
                 setLoading(false)
                 document.title = "VideoTube";

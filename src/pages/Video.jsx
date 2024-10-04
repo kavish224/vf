@@ -14,7 +14,7 @@ export const Video = () => {
     useEffect(() => {
         const sugVideos = async () => {
             try {
-                const video = await axios.get("https://vtapi.kavishambani.in/api/v1/video/");
+                const video = await axios.get(`${import.meta.env.VITE_AWS_URL}/video/`);
                 setSugVideo(video.data.data.docs);
             } catch (error) {
                 console.error("Error fetching Suggested videos: ", error);
@@ -23,7 +23,7 @@ export const Video = () => {
         sugVideos();
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`https://vtapi.kavishambani.in/api/v1/comment/${videoId}`);
+                const response = await axios.get(`${import.meta.env.VITE_AWS_URL}/comment/${videoId}`);
                 const comments = response.data.data;
                 setComm(comments);
             } catch (error) {
@@ -35,7 +35,7 @@ export const Video = () => {
     useEffect(() => {
         const fetchVideo = async () => {
             try {
-                const video = await axios.get(`https://vtapi.kavishambani.in/api/v1/video/v/${videoId}`);
+                const video = await axios.get(`${import.meta.env.VITE_AWS_URL}/video/v/${videoId}`);
                 setVid(video.data.data[0])
                 document.title = `${video.data.data[0]?.title} - VideoTube`;
                 window.scrollTo(0, 0);
