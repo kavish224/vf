@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { authState } from '../recoil/authAtom';
 export const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [profDrop, setProfDrop] = useState(false);
+    const [,setAuth] = useRecoilState(authState);
     const menuRef = useRef(null);
     const profRef = useRef(null);
+    const navigate = useNavigate()
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
@@ -30,9 +34,10 @@ export const NavBar = () => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_AWS_URL}/users/logout`,{},{withCredentials: true})
             console.log(response);
+            setAuth(null);
+            navigate("/logout");
         } catch (error) {
             console.log(error);
-            
         }
         
     }
