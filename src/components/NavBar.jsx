@@ -26,9 +26,14 @@ export const NavBar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     },[])
-    const logout = () => {
-        const response = axios.post(`${import.meta.env.VITE_AWS_URL}/users/logout`,{withCredentials: true})
-        console.log(response);
+    const logout = async() => {
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_AWS_URL}/users/logout`,{},{withCredentials: true})
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+            
+        }
         
     }
     return (
