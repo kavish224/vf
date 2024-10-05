@@ -1,14 +1,40 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 export const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [profDrop, setProfDrop] = useState(false);
+    const menuRef = useRef(null);
+    const profRef = useRef(null);
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    const toggleProf = () => {
+        setProfDrop(!profDrop);
+    };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (profRef.current && !profRef.current.contains(event.target)) {
+                setProfDrop(false);
+            }
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    },[])
+    const logout = () => {
+        const response = axios.post(`${import.meta.env.VITE_AWS_URL}/users/logout`,{withCredentials: true})
+        console.log(response);
+        
+    }
     return (
         <>
             <div className="text-white flex justify-between items-center shadow-md shadow-x border-white bg-black rounded-full p-4
-                            md:flex-row flex-row md:p-4 space-x-4 relative">
+                            md:flex-row flex-row md:p-4 space-x-4 relative" ref={menuRef}>
                 <Link to={"/"} className="ml-2 text-center text-lg hover:text-x cursor-pointer">
                     Video Tube
                 </Link>
@@ -37,10 +63,24 @@ export const NavBar = () => {
                             <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                         </svg>
                     </div>
-                    <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white mr-2">
-                        <div className="flex flex-col justify-center h-full text-xl">
-                            K
+                    <div className='relative' ref={profRef}>
+                        <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white mr-2" onClick={toggleProf}>
+                            <div className="flex flex-col justify-center h-full text-xl">
+                                K
+                            </div>
                         </div>
+                        {profDrop && (
+                            <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
+                                <div>
+                                    <div className='p-3'>
+                                        Profile
+                                    </div>
+                                    <button className='p-3' onClick={logout}>
+                                        logout
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
                 {isOpen && (
@@ -63,10 +103,24 @@ export const NavBar = () => {
                                     <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                                 </svg>
                             </div>
-                            <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white">
-                                <div className="flex flex-col justify-center h-full text-xl">
-                                    K
+                            <div className='relative'>
+                                <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white" onClick={toggleProf}>
+                                    <div className="flex flex-col justify-center h-full text-xl">
+                                        K
+                                    </div>
                                 </div>
+                                {profDrop && (
+                                    <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
+                                    <div>
+                                        <div className='p-3'>
+                                            Profile
+                                        </div>
+                                        <div className='p-3'>
+                                            logout
+                                        </div>
+                                    </div>
+                                </div>
+                                )}
                             </div>
                         </div>
                     </div>
