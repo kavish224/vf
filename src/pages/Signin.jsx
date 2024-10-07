@@ -10,7 +10,7 @@ import { authState } from "../recoil/authAtom"
 export const Signin = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
-    const [,setAuth] = useRecoilState(authState);
+    const [auth,setAuth] = useRecoilState(authState);
     const navigate = useNavigate();
     const handleLogin = async()=>{
         try {
@@ -19,12 +19,16 @@ export const Signin = () => {
                 {withCredentials: true}
             );
             if (response.status === 200 && response.data) {
+                // Log to see the response from the login API
+                console.log("Login successful, fetching user details...");
                 const userResponse = await axios.get(`${import.meta.env.VITE_AWS_URL}/users/current-user`, {withCredentials: true});
                 setAuth({
                     isAuthenticated: true,
                     user: userResponse.data.user,
                 });
-                navigate("/")
+                console.log(auth);
+                
+                // navigate("/")
             }
         } catch (error) {
             console.error("Login failed", error);
