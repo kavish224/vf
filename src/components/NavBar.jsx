@@ -7,7 +7,7 @@ export const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [desktopProfDrop, setDesktopProfDrop] = useState(false);
     const [mobileProfDrop, setMobileProfDrop] = useState(false); 
-    const [,setAuth] = useRecoilState(authState);
+    const [auth,setAuth] = useRecoilState(authState);
     const menuRef = useRef(null);
     const desktopProfRef = useRef(null);
     const mobileProfRef = useRef(null);
@@ -38,6 +38,7 @@ export const NavBar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     },[])
+    console.log(auth);
     const logout = async() => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_AWS_URL}/users/logout`,{},{withCredentials: true})
