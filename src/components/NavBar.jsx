@@ -125,9 +125,9 @@ export const NavBar = () => {
                                         <div className='p-3'>
                                             Profile
                                         </div>
-                                        <div className='p-3'>
+                                        <button className='p-3' onClick={logout}>
                                             logout
-                                        </div>
+                                        </button>
                                     </div>
                                 </div>
                                 )}
