@@ -22,7 +22,7 @@ export const Signin = () => {
                 // Log to see the response from the login API
                 console.log("Login successful, fetching user details...");
                 const userResponse = await axios.get(`${import.meta.env.VITE_AWS_URL}/users/current-user`, {withCredentials: true});
-                console.log(userResponse.data);
+                console.log(userResponse.data.user);
                 
                 setAuth({
                     isAuthenticated: true,
