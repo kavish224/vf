@@ -33,13 +33,13 @@ export const NavBar = () => {
     const logout = async() => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_AWS_URL}/users/logout`,{},{withCredentials: true})
-            console.log(response);
-            setAuth(null);
-            navigate("/logout");
+            if (response.data.statusCode === 200) {
+                setAuth(null);
+                navigate("/logout");
+            }
         } catch (error) {
             console.log(error);
         }
-        
     }
     return (
         <>
