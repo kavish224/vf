@@ -11,6 +11,10 @@ export const Signin = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [auth,setAuth] = useRecoilState(authState);
+    useEffect(() => {
+        // Log the state whenever it changes to see the updated values
+        console.log("Auth state updated:", auth);
+    }, [auth]);
     const navigate = useNavigate();
     const handleLogin = async()=>{
         try {
@@ -26,7 +30,7 @@ export const Signin = () => {
                 
                 setAuth({
                     isAuthenticated: true,
-                    user: userResponse.data,
+                    user: userResponse.data.data,
                 });
                 console.log(auth);
                 
