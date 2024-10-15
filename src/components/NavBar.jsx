@@ -24,14 +24,17 @@ export const NavBar = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                // Attempt to fetch the user session or auth status
                 const response = await axios.get(`${import.meta.env.VITE_AWS_URL}/users/current-user`, { withCredentials: true });
+                console.log("Response from current-user:", response.data); // Log the entire response
                 if (response.data.user) {
+                    console.log("User is authenticated:", response.data.user); // Log authenticated user
                     setAuth(response.data); // Set auth if the user is authenticated
                 } else {
+                    console.log("No user is authenticated");
                     setAuth(null); // No user is logged in
                 }
             } catch (error) {
+                console.error("Error checking auth:", error);
                 setAuth(null); // Set auth to null if there's an error
             }
         };
