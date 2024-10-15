@@ -118,7 +118,7 @@ export const NavBar = () => {
                         </div>
                     ) : (
                         <button className="bg-x text-white px-4 py-2 rounded-lg" onClick={() => navigate("/signin")}>
-                            Signin
+                            Sign in
                         </button>
                     )}
                 </div>
