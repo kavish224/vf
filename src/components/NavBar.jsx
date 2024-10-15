@@ -83,28 +83,27 @@ export const NavBar = () => {
                     </div>
                     {auth?.user ? (
                         <div className='relative' ref={desktopProfRef}>
-                        <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white mr-2" onClick={toggleDesktopProf}>
-                            {auth?.user?.avatar ? (<img src={auth.user.avatar} />) : (
-                                <div className="flex flex-col justify-center h-full text-xl">
-                                    {auth?.user?.username?.charAt(0).toUpperCase() || 'K'}
-                                </div>)}
-                        </div>
-                        {desktopProfDrop && (
-                            <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
-                                <div>
-                                    <div className='p-3'>
-                                        Profile
-                                    </div>
-                                    <button className='p-3' onClick={logout}>
-                                        logout
-                                    </button>
-                                </div>
+                            <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white mr-2" onClick={toggleDesktopProf}>
+                                {auth?.user?.avatar ? (<img className="rounded-full h-12 w-12" src={auth.user.avatar} />) : (<img className='rounded-full h-12 w-12' src='images.jpeg' />)}
                             </div>
-                        )}
-                    </div>
-                    ) : <button>
-                            l
-                        </button>}
+                            {desktopProfDrop && (
+                                <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
+                                    <div>
+                                        <div className='p-3'>
+                                            Profile
+                                        </div>
+                                        <button className='p-3' onClick={logout}>
+                                            logout
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <button className="bg-x text-white px-4 py-2 rounded-lg" onClick={() => navigate("/login")}>
+                            Login
+                        </button>
+                    )}
                 </div>
                 {isOpen && (
                     <div className="md:hidden absolute top-12 left-0 w-[90%] bg-black rounded-lg shadow-md shadow-x p-8 z-50">
@@ -128,7 +127,7 @@ export const NavBar = () => {
                             </div>
                             {auth?.user ? <div className='relative' ref={mobileProfRef}>
                                 <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white" onClick={toggleMobileProf}>
-                                    <img src={auth.user.avatar} />
+                                    {auth.user?.avatar ? (<img className="rounded-full h-12 w-12" src={auth.user.avatar} />) : (<img className="rounded-full h-12 w-12" src='images.jpeg' />)}
                                 </div>
                                 {mobileProfDrop && (
                                     <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
@@ -143,8 +142,8 @@ export const NavBar = () => {
                                     </div>
                                 )}
                             </div> : (
-                                <button>
-                                    l   
+                                <button className="bg-x text-white px-4 py-2 rounded-lg" onClick={() => navigate("/login")}>
+                                    Login
                                 </button>
                             )}
                         </div>
