@@ -100,8 +100,8 @@ export const NavBar = () => {
                             )}
                         </div>
                     ) : (
-                        <button className="bg-x text-white px-4 py-2 rounded-lg" onClick={() => navigate("/login")}>
-                            Login
+                        <button className="bg-x text-white px-4 py-2 rounded-lg" onClick={() => navigate("/signin")}>
+                            signin
                         </button>
                     )}
                 </div>
@@ -142,8 +142,8 @@ export const NavBar = () => {
                                     </div>
                                 )}
                             </div> : (
-                                <button className="bg-x text-white px-4 py-2 rounded-lg" onClick={() => navigate("/login")}>
-                                    Login
+                                <button className="bg-x text-white px-4 py-2 rounded-lg" onClick={() => navigate("/signin")}>
+                                    Signin
                                 </button>
                             )}
                         </div>
