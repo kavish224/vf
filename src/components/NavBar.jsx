@@ -98,7 +98,7 @@ export const NavBar = () => {
                             <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                         </svg>
                     </div>
-                    {auth?.isAuthenticated === true ? (
+                    {auth.user === true ? (
                         <div className='relative' ref={desktopProfRef}>
                             <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white mr-2" onClick={toggleDesktopProf}>
                                 {auth?.user?.avatar ? (<img className="rounded-full h-12 w-12" src={auth.user.avatar} />) : (<img className='rounded-full h-12 w-12' src='images.jpeg' />)}
@@ -142,7 +142,7 @@ export const NavBar = () => {
                                     <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                                 </svg>
                             </div>
-                            {auth?.isAuthenticated === true ? <div className='relative' ref={mobileProfRef}>
+                            {auth.user ? <div className='relative' ref={mobileProfRef}>
                                 <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white" onClick={toggleMobileProf}>
                                     {auth.user?.avatar ? (<img className="rounded-full h-12 w-12" src={auth.user.avatar} />) : (<img className="rounded-full h-12 w-12" src='images.jpeg' />)}
                                 </div>
