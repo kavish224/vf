@@ -22,6 +22,22 @@ export const NavBar = () => {
         setMobileProfDrop(!mobileProfDrop);
     };
     useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                // Attempt to fetch the user session or auth status
+                const response = await axios.get(`${import.meta.env.VITE_AWS_URL}/users/current-user`, { withCredentials: true });
+                if (response.data.user) {
+                    setAuth(response.data); // Set auth if the user is authenticated
+                } else {
+                    setAuth(null); // No user is logged in
+                }
+            } catch (error) {
+                setAuth(null); // Set auth to null if there's an error
+            }
+        };
+        checkAuth();
+    }, [])
+    useEffect(() => {
         const handleClickOutside = (event) => {
             if (desktopProfRef.current && !desktopProfRef.current.contains(event.target)) {
                 setDesktopProfDrop(false);
