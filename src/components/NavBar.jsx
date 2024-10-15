@@ -25,16 +25,13 @@ export const NavBar = () => {
         const checkAuth = async () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_AWS_URL}/users/current-user`, { withCredentials: true });
-                console.log("Response from current-user:", response.data); // Log the entire response
-                if (response.data.user) {
-                    console.log("User is authenticated:", response.data.user); // Log authenticated user
-                    setAuth(response.data); // Set auth if the user is authenticated
+                if (response.data.success && response.data.data) {
+                    setAuth(response.data.data); // Set auth with user data
                 } else {
-                    console.log("No user is authenticated");
                     setAuth(null); // No user is logged in
                 }
             } catch (error) {
-                console.error("Error checking auth:", error);
+                console.error(error);
                 setAuth(null); // Set auth to null if there's an error
             }
         };
@@ -101,7 +98,7 @@ export const NavBar = () => {
                             <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                         </svg>
                     </div>
-                    {auth?.user ? (
+                    {auth?.isAuthenticated ? (
                         <div className='relative' ref={desktopProfRef}>
                             <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white mr-2" onClick={toggleDesktopProf}>
                                 {auth?.user?.avatar ? (<img className="rounded-full h-12 w-12" src={auth.user.avatar} />) : (<img className='rounded-full h-12 w-12' src='images.jpeg' />)}
@@ -145,7 +142,7 @@ export const NavBar = () => {
                                     <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                                 </svg>
                             </div>
-                            {auth?.user ? <div className='relative' ref={mobileProfRef}>
+                            {auth?.isAuthenticated ? <div className='relative' ref={mobileProfRef}>
                                 <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white" onClick={toggleMobileProf}>
                                     {auth.user?.avatar ? (<img className="rounded-full h-12 w-12" src={auth.user.avatar} />) : (<img className="rounded-full h-12 w-12" src='images.jpeg' />)}
                                 </div>
