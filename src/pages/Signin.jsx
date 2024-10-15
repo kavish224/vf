@@ -43,7 +43,7 @@ export const Signin = () => {
                             <Button label={"Login"} onClick={handleLogin}/>
                         </div>
                         <div className="flex items-center justify-center">
-                            <SubHeading label={"Already have an account?"}/>
+                            <SubHeading label={"New to Videotube"}/>
                             <Link to={"/signup"} className="block text-sm font-medium text-left py-2 mb-1 pl-1 underline">Sign up</Link>
                         </div>
                     </div>
