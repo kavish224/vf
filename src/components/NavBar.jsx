@@ -98,7 +98,7 @@ export const NavBar = () => {
                         </div>
                         {desktopProfDrop && (
                             <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
-                                <div className='p-3'>Profile</div>
+                                <Link to={"/profile"} className='p-3'>Profile</Link>
                                 <button className='p-3' onClick={logout}>Logout</button>
                             </div>
                         )}
@@ -128,7 +128,7 @@ export const NavBar = () => {
                                 </div>
                                 {mobileProfDrop && (
                                     <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
-                                        <div className='p-3'>Profile</div>
+                                        <Link to={"/profile"} className='p-3'>Profile</Link>
                                         <button className='p-3' onClick={logout}>Logout</button>
                                     </div>
                                 )}
