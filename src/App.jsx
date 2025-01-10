@@ -6,6 +6,7 @@ import { Signin } from './pages/Signin'
 import { RecoilRoot } from 'recoil'
 import { Logout } from './pages/Logout'
 import { Signup } from './pages/Signup'
+import { Profile } from './pages/Profile'
 function App() {
 
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/watch' element={<Video />} />
             <Route path='/logout' element={<Logout/>} />
+            <Route path='/profile' element={<Profile/>} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
