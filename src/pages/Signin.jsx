@@ -55,13 +55,17 @@ export const Signin = () => {
                     <Input
                         label="Username"
                         placeholder="xyz22"
-                        onChange={(e) => setUser(e.target.value)}
+                        onChange={(e) => {setUser(e.target.value);
+                            setErrorMessage("");
+                        }}
                         aria-label="Username"
                     />
                     <Input
                         label="Password"
                         placeholder="********"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {setPassword(e.target.value);
+                            setErrorMessage("");
+                        }}
                         type="password"
                         aria-label="Password"
                     />
@@ -73,6 +77,7 @@ export const Signin = () => {
                             label={isLoading ? "Logging in..." : "Login"}
                             onClick={handleLogin}
                             disabled={isLoading}
+                            className={isLoading ? "opacity-50 cursor-not-allowed" : ""}
                         />
                     </div>
                     <div className="flex items-center justify-center mt-4">
