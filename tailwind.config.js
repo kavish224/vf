@@ -13,7 +13,9 @@ export default {
       "darkGray": "#333333",
       "mutedGray": "#A0A0A0",
       "softBlue": "#7A9BA6",
-      "lightGray": "#F5F5F5"
+      "lightGray": "#F5F5F5",
+      "err":"#D8000C",
+      "succ":"#3CB0A4",
     }
   },
   plugins: [],
