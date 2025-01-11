@@ -7,6 +7,8 @@ import { RecoilRoot } from 'recoil'
 import { Logout } from './pages/Logout'
 import { Signup } from './pages/Signup'
 import { Profile } from './pages/Profile'
+import { ChangePass } from './pages/ChangePass'
+import { Update } from './pages/UpdateAccDetails'
 function App() {
 
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path='/watch' element={<Video />} />
             <Route path='/logout' element={<Logout/>} />
             <Route path='/profile' element={<Profile/>} />
+            <Route path='/change-pass' element={<ChangePass/>} />
+            <Route path='/update-acc-details' element={<Update/>} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
