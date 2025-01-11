@@ -107,11 +107,11 @@ export const Video = () => {
                                 <div>{vid.owner?.username}</div>
                                 <div className="text-xs">{vid.owner?.subscribersCount} Subscribers</div>
                             </div>
-                            <button onClick={handleSubscribe}
+                            {/* <button onClick={handleSubscribe}
                                 className={`ml-4 px-4 py-2 rounded-full ${vid.owner?.isSubscribed ? 'bg-white text-black' : 'bg-x text-white hover:bg-white hover:text-black'} text-black`}
                                 disabled={vid.owner?.isSubscribed}>
                                 {vid.owner?.isSubscribed ? "Subscribed" : "Subscribe"}
-                            </button>
+                            </button> */}
                         </div>
                         <div className="shadow-md shadow-x p-4 mt-2 rounded-lg">
                             {vid?.views} views • {sinceUpload()}
