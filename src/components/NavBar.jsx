@@ -97,7 +97,7 @@ export const NavBar = () => {
                             <img className="rounded-full h-12 w-12" src={auth.user.avatar || 'images.jpeg'} alt="User Avatar" />
                         </div>
                         {desktopProfDrop && (
-                            <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
+                            <div className='flex flex-col items-start absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
                                 <Link to={"/profile"} className='p-3'>Profile</Link>
                                 <button className='p-3' onClick={logout}>Logout</button>
                             </div>
@@ -127,7 +127,7 @@ export const NavBar = () => {
                                     <img className="rounded-full h-12 w-12" src={auth.user.avatar || 'images.jpeg'} alt="User Avatar" />
                                 </div>
                                 {mobileProfDrop && (
-                                    <div className='absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
+                                    <div className='flex flex-col absolute items-start right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
                                         <Link to={"/profile"} className='p-3'>Profile</Link>
                                         <button className='p-3' onClick={logout}>Logout</button>
                                     </div>
