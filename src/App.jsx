@@ -9,6 +9,7 @@ import { Signup } from './pages/Signup'
 import { Profile } from './pages/Profile'
 import { ChangePass } from './pages/ChangePass'
 import { Update } from './pages/UpdateAccDetails'
+import { History } from './pages/History'
 function App() {
 
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/profile' element={<Profile/>} />
             <Route path='/change-pass' element={<ChangePass/>} />
             <Route path='/update-acc-details' element={<Update/>} />
+            <Route path='/history' element={<History/>} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>

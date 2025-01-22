@@ -111,10 +111,6 @@ export const Profile = () => {
                         </div>
                     </div>
                 </div>
-
-
-
-
                 {/* Action Buttons */}
                 <div className="mt-8 bg-darkGray shadow-lg rounded-lg p-6 flex flex-col gap-4 max-w-3xl mx-auto">
                     <Link to={"/update-acc-details"}><button className="w-full bg-lightGray text-black rounded hover:bg-mutedGray text-sm md:text-base lg:text-lg py-2 md:py-3 lg:py-4">
@@ -122,6 +118,9 @@ export const Profile = () => {
                     </button></Link>
                     <Link to={"/change-pass"}><button className="w-full bg-lightGray text-black rounded hover:bg-mutedGray text-sm md:text-base lg:text-lg py-2 md:py-3 lg:py-4">
                         Change Password
+                    </button></Link>
+                    <Link to={"/history"}><button className="w-full bg-lightGray text-black rounded hover:bg-mutedGray text-sm md:text-base lg:text-lg py-2 md:py-3 lg:py-4">
+                        Watch History
                     </button></Link>
                     <button className="w-full bg-lightGray text-black rounded hover:bg-x text-sm md:text-base lg:text-lg py-2 md:py-3 lg:py-4" onClick={logout}>
                         Logout
