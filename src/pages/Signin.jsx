@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Heading } from "../components/Heading";
 import { Input } from "../components/Input";
 import { SubHeading } from "../components/SubHeading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { authState } from "../recoil/authAtom";
@@ -28,14 +28,10 @@ export const Signin = () => {
                 { username: user, password },
                 { withCredentials: true }
             );
-            if (response.status === 200 && response.data) {
-                const userResponse = await axios.get(
-                    `${import.meta.env.VITE_AWS_URL}/users/current-user`,
-                    { withCredentials: true }
-                );
+            if (response.data.statusCode === 200 && response.data) {
                 setAuth({
                     isAuthenticated: true,
-                    user: userResponse.data.data,
+                    user: response?.data?.data?.user,
                 });
                 navigate("/");
             }
@@ -46,11 +42,10 @@ export const Signin = () => {
             setIsLoading(false);
         }
     };
-
     return (
         <div className="flex justify-center p-28 bg-black text-white min-h-screen">
             <div className="flex flex-col w-full max-w-sm">
-                <div className="rounded-lg w-full text-center p-5 shadow-lg">
+                <div className="rounded-lg w-full text-center p-5 shadow-lg flex flex-col gap-4">
                     <Heading label="Signin" />
                     <Input
                         label="Username"
