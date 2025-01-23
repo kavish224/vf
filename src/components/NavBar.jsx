@@ -1,40 +1,22 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { authState } from '../recoil/authAtom';
 
 export const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [desktopProfDrop, setDesktopProfDrop] = useState(false);
     const [mobileProfDrop, setMobileProfDrop] = useState(false);
-    const [auth, setAuth] = useRecoilState(authState);
+    const [, setAuth] = useRecoilState(authState)
+    const currentUser = useRecoilValue(authState)
     const menuRef = useRef(null);
     const desktopProfRef = useRef(null);
     const mobileProfRef = useRef(null);
     const navigate = useNavigate();
-
     const toggleMenu = () => setIsOpen(!isOpen);
     const toggleDesktopProf = () => setDesktopProfDrop(!desktopProfDrop);
     const toggleMobileProf = () => setMobileProfDrop(!mobileProfDrop);
-
-    // Check authentication on component mount
-    useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_AWS_URL}/users/current-user`, { withCredentials: true });
-                if (response.data.success && response.data.data) {
-                    setAuth({ isAuthenticated: true, user: response.data.data });
-                } else {
-                    setAuth({ isAuthenticated: false, user: {} });
-                }
-            } catch (error) {
-                console.error(error);
-                setAuth({ isAuthenticated: false, user: {} });
-            }
-        };
-        checkAuth();
-    }, [setAuth]);
 
     // Handle clicks outside the menu and profile dropdowns
     useEffect(() => {
@@ -91,10 +73,10 @@ export const NavBar = () => {
                         <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                     </svg>
                 </div>
-                {auth.isAuthenticated ? (
+                {currentUser.isAuthenticated ? (
                     <div className='relative' ref={desktopProfRef}>
                         <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white" onClick={toggleDesktopProf}>
-                            <img className="rounded-full h-12 w-12" src={auth.user.avatar || 'images.jpeg'} alt="User Avatar" />
+                            <img className="rounded-full h-12 w-12" src={currentUser?.user?.avatar || 'https://avatars.githubusercontent.com/u/2452636?v=4'} alt="User Avatar" />
                         </div>
                         {desktopProfDrop && (
                             <div className='flex flex-col items-start absolute right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
@@ -121,10 +103,10 @@ export const NavBar = () => {
                                 <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                             </svg>
                         </div>
-                        {auth.isAuthenticated ? (
+                        {currentUser.isAuthenticated ? (
                             <div className='relative' ref={mobileProfRef}>
                                 <div className="rounded-full h-12 w-12 hover:text-x cursor-pointer bg-black border-2 text-white flex justify-center drop-shadow-lg shadow-white" onClick={toggleMobileProf}>
-                                    <img className="rounded-full h-12 w-12" src={auth.user.avatar || 'images.jpeg'} alt="User Avatar" />
+                                    <img className="rounded-full h-12 w-12" src={currentUser.user.avatar || 'https://avatars.githubusercontent.com/u/2452636?v=4'} alt="User Avatar" />
                                 </div>
                                 {mobileProfDrop && (
                                     <div className='flex flex-col absolute items-start right-0 mt-2 w-48 bg-black text-white rounded-lg shadow-md shadow-x py-2 z-50'>
