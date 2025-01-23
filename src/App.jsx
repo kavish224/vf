@@ -10,6 +10,7 @@ import { Profile } from './pages/Profile'
 import { ChangePass } from './pages/ChangePass'
 import { Update } from './pages/UpdateAccDetails'
 import { History } from './pages/History'
+import { ChannelProf } from './pages/ChannelProf'
 function App() {
 
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path='/change-pass' element={<ChangePass/>} />
             <Route path='/update-acc-details' element={<Update/>} />
             <Route path='/history' element={<History/>} />
+            <Route path='/c' element={<ChannelProf/>} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
